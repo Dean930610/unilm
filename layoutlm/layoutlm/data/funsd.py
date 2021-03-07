@@ -84,7 +84,7 @@ class FunsdDataset(Dataset):
 class InputExample(object):
     """A single training/test example for token classification."""
 
-    def __init__(self, guid, words, labels, boxes, actual_bboxes, file_name, page_size):
+    def __init__(self, guid, words, labels, boxes,page_size):
         """Constructs a InputExample.
 
         Args:
@@ -97,8 +97,6 @@ class InputExample(object):
         self.words = words
         self.labels = labels
         self.boxes = boxes
-        self.actual_bboxes = actual_bboxes
-        self.file_name = file_name
         self.page_size = page_size
 
 
@@ -159,7 +157,7 @@ def convert_examples_to_features(
 
     features = []
     for (ex_index, example) in enumerate(examples):
-        
+        print(ex_index)
         page_size = example.pagesize
         width, height = page_size
         if ex_index % 10000 == 0:
@@ -169,7 +167,6 @@ def convert_examples_to_features(
         label_ids = []
         
         for word, label, box in zip(example.words, example.structures, example.bboxes):
-            print(word)
             word_tokens = tokenizer.tokenize(word)
             tokens.extend(word_tokens)
             token_boxes.extend([box] * len(word_tokens))
@@ -252,6 +249,7 @@ def convert_examples_to_features(
         assert len(input_ids) == max_seq_length
         assert len(input_mask) == max_seq_length
         assert len(segment_ids) == max_seq_length
+        print(label_ids)
         assert len(label_ids) == max_seq_length
         assert len(token_boxes) == max_seq_length
 
