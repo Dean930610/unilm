@@ -112,8 +112,6 @@ class InputFeatures(object):
         segment_ids,
         label_ids,
         boxes,
-        actual_bboxes,
-        file_name,
         page_size,
     ):
         assert (
@@ -126,8 +124,6 @@ class InputFeatures(object):
         self.segment_ids = segment_ids
         self.label_ids = label_ids
         self.boxes = boxes
-        self.actual_bboxes = actual_bboxes
-        self.file_name = file_name
         self.page_size = page_size
 
 
@@ -163,7 +159,7 @@ def convert_examples_to_features(
 
     features = []
     for (ex_index, example) in enumerate(examples):
-        file_name = example.file_path
+        
         page_size = example.page_size
         width, height = page_size
         if ex_index % 10000 == 0:
@@ -277,8 +273,6 @@ def convert_examples_to_features(
                 segment_ids=segment_ids,
                 label_ids=label_ids,
                 boxes=token_boxes,
-                
-                file_name=file_name,
                 page_size=page_size,
             )
         )
