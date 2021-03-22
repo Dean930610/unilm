@@ -27,6 +27,7 @@ class FunsdDataset(Dataset):
         else:
             logger.info("Creating features from dataset file at %s", args.data_dir)
             examples = read_examples_from_file(args.data_dir, mode)
+            print(len(examples))
             features = convert_examples_to_features(
                 examples,
                 labels,
