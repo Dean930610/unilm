@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 logger = logging.getLogger(__name__)
 
 
-class FunsdDataset(Dataset):
+class DocbankDataset(Dataset):
     def __init__(self, args, tokenizer, labels, pad_token_label_id, mode):
         if args.local_rank not in [-1, 0] and mode == "train":
             torch.distributed.barrier()  # Make sure only the first process in distributed training process the dataset, and the others will use the cache
